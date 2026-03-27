@@ -14,9 +14,9 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <WeatherWidget />
+        <CityExplorer />
         <CitiesSection />
         <ExperiencesSection />
-        <CityExplorer />
         <CurrencyConverter />
       </main>
       <Footer />

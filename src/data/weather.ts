@@ -9,7 +9,7 @@ export interface WeatherDay {
   rain: number;
 }
 
-export function generateForecast(): WeatherDay[] {
+export function generateForecast(numDays: number = 5): WeatherDay[] {
   const days = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
   const conditions = [
     { text: "Parcialmente nublado", icon: "cloud-sun", temp: [30, 33], rain: 20 },
@@ -17,10 +17,13 @@ export function generateForecast(): WeatherDay[] {
     { text: "Soleado", icon: "sun", temp: [31, 35], rain: 10 },
     { text: "Tormentas vespertinas", icon: "cloud-lightning", temp: [28, 32], rain: 60 },
     { text: "Nublado con claros", icon: "cloud", temp: [29, 32], rain: 35 },
+    { text: "Soleado con nubes altas", icon: "cloud-sun", temp: [30, 34], rain: 15 },
+    { text: "Chubascos puntuales", icon: "cloud-rain", temp: [28, 31], rain: 55 },
+    { text: "Despejado", icon: "sun", temp: [32, 36], rain: 5 },
   ];
 
   const today = new Date();
-  return Array.from({ length: 5 }, (_, i) => {
+  return Array.from({ length: numDays }, (_, i) => {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     const cond = conditions[i % conditions.length];

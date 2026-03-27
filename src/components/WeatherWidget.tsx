@@ -38,7 +38,10 @@ const ALL_CITIES = [
   "Putrajaya", "Alor Setar", "Seremban", "Taiping", "Mersing",
 ];
 
+const DAY_OPTIONS = [5, 8, 10, 15];
+
 export default function WeatherWidget() {
+  const [numDays, setNumDays] = useState(5);
   const [forecast, setForecast] = useState<WeatherDay[]>([]);
   const [selectedCity, setSelectedCity] = useState("Kuala Lumpur");
   const [showTips, setShowTips] = useState(false);
@@ -66,8 +69,8 @@ export default function WeatherWidget() {
   };
 
   useEffect(() => {
-    setForecast(generateForecast());
-  }, [selectedCity]);
+    setForecast(generateForecast(numDays));
+  }, [selectedCity, numDays]);
 
   if (forecast.length === 0) return null;
 
@@ -79,7 +82,7 @@ export default function WeatherWidget() {
             Clima en Malasia
           </h2>
           <p className="text-gray-500">
-            Prevision meteorologica de los proximos 5 dias
+            Prevision meteorologica de los proximos {numDays} dias
           </p>
         </div>
 
@@ -139,7 +142,7 @@ export default function WeatherWidget() {
         </p>
 
         {/* Forecast cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6">
           {forecast.map((day, i) => {
             const Icon = iconMap[day.icon] || Sun;
             return (
@@ -164,6 +167,24 @@ export default function WeatherWidget() {
               </div>
             );
           })}
+        </div>
+
+        {/* Days selector */}
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <span className="text-sm text-gray-500">Mostrar:</span>
+          {DAY_OPTIONS.map((d) => (
+            <button
+              key={d}
+              onClick={() => setNumDays(d)}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                numDays === d
+                  ? "bg-primary text-white shadow-md"
+                  : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
+              }`}
+            >
+              {d} dias
+            </button>
+          ))}
         </div>
 
         {/* Tips */}
