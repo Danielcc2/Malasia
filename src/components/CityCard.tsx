@@ -37,6 +37,15 @@ const categoryLabels: Record<string, string> = {
   playa: "Playa",
 };
 
+function myrToEur(myrStr: string): string {
+  // Parses "150-250 MYR" -> "32-53 EUR"
+  const match = myrStr.match(/([\d]+)-([\d]+)/);
+  if (!match) return "";
+  const lo = Math.round(parseInt(match[1]) / 4.72);
+  const hi = Math.round(parseInt(match[2]) / 4.72);
+  return `≈${lo}-${hi} EUR`;
+}
+
 export default function CityCard({ city, index }: { city: City; index: number }) {
   const [expanded, setExpanded] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -103,7 +112,7 @@ export default function CityCard({ city, index }: { city: City; index: number })
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <Wallet className="w-4 h-4 text-amber-500" />
-            <span>{city.avgBudgetPerDay}/dia</span>
+            <span>{city.avgBudgetPerDay}/dia <span className="text-xs text-gray-400">({myrToEur(city.avgBudgetPerDay)})</span></span>
           </div>
         </div>
 

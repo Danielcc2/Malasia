@@ -7,6 +7,7 @@ const links = [
   { href: "#inicio", label: "Inicio" },
   { href: "#clima", label: "Clima" },
   { href: "#ciudades", label: "Ciudades" },
+  { href: "#experiencias", label: "Experiencias" },
   { href: "#explorar", label: "Explorar" },
   { href: "#conversor", label: "Conversor" },
 ];

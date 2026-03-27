@@ -10,6 +10,8 @@ import {
   Droplets,
   Thermometer,
   Info,
+  Search,
+  X,
 } from "lucide-react";
 import { generateForecast, weatherTips, type WeatherDay } from "@/data/weather";
 
@@ -29,10 +31,19 @@ const iconColorMap: Record<string, string> = {
   cloud: "text-gray-500",
 };
 
+const ALL_CITIES = [
+  "Kuala Lumpur", "George Town", "Langkawi", "Kota Kinabalu", "Cameron Highlands",
+  "Malaca", "Kuching", "Islas Perhentian", "Ipoh", "Taman Negara",
+  "Johor Bahru", "Kota Bharu", "Kuala Terengganu", "Sandakan", "Miri",
+  "Putrajaya", "Alor Setar", "Seremban", "Taiping", "Mersing",
+];
+
 export default function WeatherWidget() {
   const [forecast, setForecast] = useState<WeatherDay[]>([]);
   const [selectedCity, setSelectedCity] = useState("Kuala Lumpur");
   const [showTips, setShowTips] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const topCities = [
     "Kuala Lumpur",
@@ -41,6 +52,18 @@ export default function WeatherWidget() {
     "Kota Kinabalu",
     "Cameron Highlands",
   ];
+
+  const suggestions = searchQuery.trim()
+    ? ALL_CITIES.filter((c) =>
+        c.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  const handleSelectCity = (city: string) => {
+    setSelectedCity(city);
+    setSearchQuery("");
+    setShowSuggestions(false);
+  };
 
   useEffect(() => {
     setForecast(generateForecast());
@@ -60,12 +83,47 @@ export default function WeatherWidget() {
           </p>
         </div>
 
-        {/* City selector */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        {/* Manual search */}
+        <div className="max-w-sm mx-auto mb-6 relative">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setShowSuggestions(true); }}
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+              placeholder="Buscar ciudad..."
+              className="w-full pl-9 pr-9 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+          {showSuggestions && suggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 z-20 max-h-48 overflow-y-auto">
+              {suggestions.map((city) => (
+                <button
+                  key={city}
+                  onMouseDown={() => handleSelectCity(city)}
+                  className="w-full text-left px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors flex items-center gap-2"
+                >
+                  <Search className="w-3 h-3 text-gray-400" />
+                  {city}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Quick city selector */}
+        <div className="flex flex-wrap justify-center gap-2 mb-4">
           {topCities.map((city) => (
             <button
               key={city}
-              onClick={() => setSelectedCity(city)}
+              onClick={() => handleSelectCity(city)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedCity === city
                   ? "bg-primary text-white shadow-md"
@@ -76,6 +134,9 @@ export default function WeatherWidget() {
             </button>
           ))}
         </div>
+        <p className="text-center text-sm font-semibold text-primary mb-6">
+          {selectedCity}
+        </p>
 
         {/* Forecast cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-8">
