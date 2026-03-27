@@ -10,6 +10,8 @@ import {
   Sparkles,
   ChevronDown,
   ChevronUp,
+  ChevronRight,
+  ChevronLeft,
   MapPin,
   Banknote,
   Star,
@@ -24,6 +26,7 @@ interface Experience {
   priceEur: string;
   tip: string;
   stars: number;
+  subCategory?: string;
 }
 
 interface Category {
@@ -654,152 +657,21 @@ const categories: Category[] = [
         tip: "El pisang goreng esta en cada esquina de Malasia pero el mejor es el recien hecho. Si el aceite esta humean el wok, es fresco. Si esta en bandeja fria, pasa de largo.",
         stars: 4,
       },
-    ],
-  },
-  {
-    id: "comida-daniel",
-    icon: UtensilsCrossed,
-    label: "Comida Daniel",
-    emoji: "🍗",
-    color: "text-lime-700",
-    bgColor: "bg-lime-50 border-lime-100",
-    subtitle: "Pollo, arroz, ensaladas y los mejores restaurantes indios de Malasia",
-    experiences: [
-      {
-        name: "Restoran Nasi Ayam Hainanese",
-        location: "Chinatown, Kuala Lumpur",
-        description: "El clasico pollo hainanes: pollo cocido a fuego lento hasta quedar tierno y jugoso, servido sobre arroz cocinado en caldo de pollo con ajo. Con pepino fresco, salsa de jengibre y soja oscura. El plato mas reconfortante de toda Asia.",
-        price: "10-18 MYR",
-        priceEur: "2-4 EUR",
-        tip: "Pide el pollo asado (roasted) si prefieres piel crujiente en vez del hervido. Siempre pide sopa extra, es gratis y esta deliciosa.",
-        stars: 5,
-      },
-      {
-        name: "Chicken Rice Ball de Malaca",
-        location: "Chung Wah Restaurant, Malaca",
-        description: "La version unica de Malaca del pollo hainanes: el arroz se moldea en bolitas perfectas del tamaño de una pelota de golf. Pollo tierno, bolitas de arroz fragante y sopa clara. Un plato con 100 anos de historia en la ciudad.",
-        price: "12-20 MYR",
-        priceEur: "2.50-4 EUR",
-        tip: "Chung Wah en Jonker Street es el original desde 1918. Hay cola pero el local de al lado es casi igual de bueno y sin espera.",
-        stars: 5,
-      },
-      {
-        name: "Restoran Nasi Kandar Pelita",
-        location: "Jalan Ampang, Kuala Lumpur",
-        description: "El nasi kandar mas famoso de KL: elige tu arroz y encima el cocinero vierte curry de pollo, pollo tandoori, pollo masala o pollo frito. Con ensalada de pepino y cebolla morada. Abierto 24 horas, perfecto a cualquier hora.",
-        price: "10-20 MYR",
-        priceEur: "2-4 EUR",
-        tip: "Dile 'ayam saja' (solo pollo) si quieres evitar marisco. El curry de pollo con patata es lo mas suave para paladares menos acostumbrados al picante.",
-        stars: 5,
-      },
-      {
-        name: "Banana Leaf Rice — Restaurante indio tamil",
-        location: "Brickfields / Bangsar, Kuala Lumpur",
-        description: "Arroz blanco servido sobre una hoja de platano fresca rodeado de 6-8 guarniciones: dal de lentejas, raita de yogur, pappadum crujiente, pollo masala, pollo al curry, verduras salteadas y encurtidos. El almuerzo indio mas completo.",
-        price: "15-30 MYR",
-        priceEur: "3-6 EUR",
-        tip: "Los camareros rellenan el arroz y las guarniciones gratis las veces que quieras. Come con la mano derecha como hacen los locales, sabe diferente.",
-        stars: 5,
-      },
-      {
-        name: "Restoran Anjappar — Chettinad autentico",
-        location: "Brickfields, Kuala Lumpur",
-        description: "Cocina del sur de la India de la region Chettinad, la mas especiada. Pollo chettinad (con 20 especias), biryani de pollo con arroz basmati perfumado, chicken 65 (pollo frito especiado) y roti prata crujiente. 100% autentico.",
-        price: "20-45 MYR por persona",
-        priceEur: "4-9.50 EUR",
-        tip: "El chicken biryani es el plato estrella. Si no te gusta muy picante, dile 'less spicy' al pedir. Siempre tienen opciones suaves.",
-        stars: 5,
-      },
-      {
-        name: "Nasi Kerabu — Arroz azul con pollo",
-        location: "Kota Bharu / restaurantes kelantan en KL",
-        description: "Arroz teñido de azul natural con la flor bunga telang, servido con pollo asado ayam percik con salsa de coco, ensalada de hierba buena y rabanos, huevo salado y coco tostado. Un plato tan bonito como rico.",
-        price: "10-18 MYR",
-        priceEur: "2-4 EUR",
-        tip: "El color azul es completamente natural y no afecta al sabor. Es uno de los platos mas fotografiados de Malasia por su aspecto unico.",
-        stars: 5,
-      },
-      {
-        name: "Tandoori Chicken en Little India",
-        location: "Brickfields, Kuala Lumpur",
-        description: "Pollo marinado 12 horas en yogur con especias y asado en horno tandoor de barro a 400 grados. Piel ligeramente ahumada y carbonizada, interior jugosisimo. Servido con naan recien horneado, ensalada de cebolla y chutney de menta.",
-        price: "15-30 MYR por racion",
-        priceEur: "3-6 EUR",
-        tip: "Pide medio pollo (half chicken) para 2 personas. El naan de ajo (garlic naan) es imprescindible para mojar en el curry.",
-        stars: 5,
-      },
-      {
-        name: "Nasi Padang — El bufet malayo",
-        location: "Restoran Minang, Kuala Lumpur",
-        description: "Estilo de comer indonesio-malayo: decenas de platos ya cocinados en la vitrina, eliges los que quieres sobre arroz. Rendang de pollo (seco e intenso), pollo goreng berempah (frito con especias), gulai (curry amarillo) y sambal con ensalada ulam.",
-        price: "12-25 MYR",
-        priceEur: "2.50-5.30 EUR",
-        tip: "El rendang de pollo es lo mejor: pollo cocinado horas en leche de coco hasta que se seca y concentra todos los sabores. Sin picante o muy poco.",
-        stars: 4,
-      },
-      {
-        name: "Caesar Salad y ensaladas en TGIF / Chilis",
-        location: "Pavilion KL / Mid Valley, Kuala Lumpur",
-        description: "Si buscas ensaladas al estilo occidental, las cadenas americanas TGIF, Chilis y Tony Roma's tienen caesar salad, grilled chicken salad y opciones muy reconocibles. Con pollo a la parrilla sin picante garantizado.",
-        price: "25-45 MYR",
-        priceEur: "5-9.50 EUR",
-        tip: "Los centros comerciales grandes como Pavilion y Mid Valley tienen estas cadenas en el piso de restaurantes. Perfecto cuando necesitas un respiro del picante.",
-        stars: 3,
-      },
-      {
-        name: "Ayam Goreng Berempah — Pollo frito malayo",
-        location: "Restoran Seri Melayu / Hawker centres",
-        description: "El pollo frito mas aromático del mundo: marinado durante horas con cúrcuma, lemongrass, galangal, hoja de lima kaffir y coco rallado antes de freirse. La piel queda crujiente y amarilla, el interior increiblemente jugoso.",
-        price: "8-15 MYR por pieza",
-        priceEur: "1.70-3.20 EUR",
-        tip: "Lo encuentras en todos los hawker centres al mediodia. Pide 'ayam goreng' y señala la pieza. El muslo (peha) tiene mas sabor que la pechuga.",
-        stars: 5,
-      },
-      {
-        name: "Restoran Udupi Sri Krishna — Vegetariano indio",
-        location: "Brickfields, Kuala Lumpur",
-        description: "Restaurante indio del sur 100% vegetariano estilo Udupi. Masala dosa (crepe crujiente de lentejas rellena de patata especiada), idli (tortita de arroz al vapor), sambar y 4 tipos de chutney. Ensalada de pepino y coco fresco.",
-        price: "8-20 MYR",
-        priceEur: "1.70-4 EUR",
-        tip: "El masala dosa gigante es un plato completo por 10-12 MYR. Sin carne pero muy sabroso y saciante. El lassi de mango fresco a 5 MYR es imprescindible.",
-        stars: 4,
-      },
-      {
-        name: "Nasi Campur — El plato libre",
-        location: "En toda Malasia",
-        description: "Literalmente 'arroz mezclado': un plato de arroz donde eliges libremente 3-5 acompañamientos de la vitrina. Siempre hay opcion de pollo sin picante (ayam goreng), huevo frito, tofu, verduras salteadas y pepino. El almuerzo del dia a dia malasio.",
-        price: "6-15 MYR",
-        priceEur: "1.30-3.20 EUR",
-        tip: "Señala directamente lo que quieres en la vitrina. Di 'tak pedas' (sin picante) para los curries. Siempre hay algo sin picante para elegir.",
-        stars: 4,
-      },
-      {
-        name: "Chicken Chop en los cafes coloniales de Penang",
-        location: "George Town, Penang",
-        description: "Herencia de la cocina colonial britanica en Malasia: chuleta de pollo frita a la plancha con salsa de cebolla y champiñones, servida con puré de patatas y ensalada de col. Tipico de los cafes Hainanese del siglo XX de Penang.",
-        price: "15-28 MYR",
-        priceEur: "3-6 EUR",
-        tip: "Busca los cafes Hainanese mas antiguos de George Town como Ee Beng o Toasted & Roasted. El chicken chop de los años 50 con salsa Worcester es unico.",
-        stars: 4,
-      },
-      {
-        name: "Biryani de pollo en Masjid India",
-        location: "Masjid India, Kuala Lumpur",
-        description: "El barrio musulman de KL tiene los mejores biryani de la ciudad: arroz basmati perfumado con azafran, cardamomo y rosas, cocinado junto al pollo en olla sellada con masa (dum biryani). Con raita de yogur y ensalada de cebolla encurtida.",
-        price: "12-22 MYR",
-        priceEur: "2.50-4.70 EUR",
-        tip: "Los restaurantes del callejon detras de la mezquita tienen los precios mas bajos. Los viernes al mediodia estan llenos de fieles despues del rezo.",
-        stars: 5,
-      },
-      {
-        name: "Subway, Marrybrown y comida rapida halal",
-        location: "En toda Malasia",
-        description: "Malasia tiene una cadena de comida rapida local llamada Marrybrown con pollo frito, arroz y opciones halal muy asequibles. Subway tiene todos sus sanduiches con opciones de pollo asado y ensalada. Ideal cuando necesitas algo rapido y familiar.",
-        price: "10-20 MYR",
-        priceEur: "2-4 EUR",
-        tip: "Marrybrown es mas barato que KFC y el pollo es sorprendentemente bueno. Su arroz con pollo es el menu mas pedido. Hay en todos los centros comerciales.",
-        stars: 3,
-      },
+      { name: "Restoran Nasi Ayam Hainanese", location: "Chinatown, Kuala Lumpur", description: "El clasico pollo hainanes: pollo cocido a fuego lento hasta quedar tierno y jugoso, servido sobre arroz cocinado en caldo de pollo con ajo. Con pepino fresco, salsa de jengibre y soja oscura. El plato mas reconfortante de toda Asia.", price: "10-18 MYR", priceEur: "2-4 EUR", tip: "Pide el pollo asado (roasted) si prefieres piel crujiente en vez del hervido. Siempre pide sopa extra, es gratis y esta deliciosa.", stars: 5, subCategory: "daniel" },
+      { name: "Chicken Rice Ball de Malaca", location: "Chung Wah Restaurant, Malaca", description: "La version unica de Malaca del pollo hainanes: el arroz se moldea en bolitas perfectas del tamaño de una pelota de golf. Pollo tierno, bolitas de arroz fragante y sopa clara. Un plato con 100 anos de historia en la ciudad.", price: "12-20 MYR", priceEur: "2.50-4 EUR", tip: "Chung Wah en Jonker Street es el original desde 1918. Hay cola pero el local de al lado es casi igual de bueno y sin espera.", stars: 5, subCategory: "daniel" },
+      { name: "Restoran Nasi Kandar Pelita", location: "Jalan Ampang, Kuala Lumpur", description: "El nasi kandar mas famoso de KL: elige tu arroz y encima el cocinero vierte curry de pollo, pollo tandoori, pollo masala o pollo frito. Con ensalada de pepino y cebolla morada. Abierto 24 horas.", price: "10-20 MYR", priceEur: "2-4 EUR", tip: "Dile 'ayam saja' (solo pollo) si quieres evitar marisco. El curry de pollo con patata es lo mas suave para paladares menos acostumbrados al picante.", stars: 5, subCategory: "daniel" },
+      { name: "Banana Leaf Rice — Restaurante indio tamil", location: "Brickfields / Bangsar, Kuala Lumpur", description: "Arroz blanco servido sobre una hoja de platano fresca rodeado de 6-8 guarniciones: dal de lentejas, raita de yogur, pappadum crujiente, pollo masala, pollo al curry, verduras salteadas y encurtidos. El almuerzo indio mas completo.", price: "15-30 MYR", priceEur: "3-6 EUR", tip: "Los camareros rellenan el arroz y las guarniciones gratis las veces que quieras. Come con la mano derecha como hacen los locales, sabe diferente.", stars: 5, subCategory: "daniel" },
+      { name: "Restoran Anjappar — Chettinad autentico", location: "Brickfields, Kuala Lumpur", description: "Cocina del sur de la India de la region Chettinad. Pollo chettinad con 20 especias, biryani de pollo con arroz basmati perfumado, chicken 65 (pollo frito especiado) y roti prata crujiente. 100% autentico.", price: "20-45 MYR por persona", priceEur: "4-9.50 EUR", tip: "El chicken biryani es el plato estrella. Si no te gusta muy picante, dile 'less spicy' al pedir. Siempre tienen opciones suaves.", stars: 5, subCategory: "daniel" },
+      { name: "Nasi Kerabu — Arroz azul con pollo", location: "Kota Bharu / restaurantes kelantan en KL", description: "Arroz teñido de azul natural con la flor bunga telang, servido con pollo asado ayam percik con salsa de coco, ensalada de hierba buena y rabanos, huevo salado y coco tostado.", price: "10-18 MYR", priceEur: "2-4 EUR", tip: "El color azul es completamente natural. Es uno de los platos mas fotografiados de Malasia por su aspecto unico.", stars: 5, subCategory: "daniel" },
+      { name: "Tandoori Chicken en Little India", location: "Brickfields, Kuala Lumpur", description: "Pollo marinado 12 horas en yogur con especias y asado en horno tandoor de barro a 400 grados. Piel ahumada y carbonizada, interior jugosisimo. Servido con naan recien horneado, ensalada de cebolla y chutney de menta.", price: "15-30 MYR por racion", priceEur: "3-6 EUR", tip: "Pide medio pollo (half chicken) para 2 personas. El naan de ajo (garlic naan) es imprescindible para mojar en el curry.", stars: 5, subCategory: "daniel" },
+      { name: "Nasi Padang — El bufet malayo", location: "Restoran Minang, Kuala Lumpur", description: "Decenas de platos ya cocinados en la vitrina: rendang de pollo (seco e intenso), pollo goreng berempah (frito con especias), gulai (curry amarillo) y sambal con ensalada ulam. Eliges lo que quieres sobre arroz.", price: "12-25 MYR", priceEur: "2.50-5.30 EUR", tip: "El rendang de pollo es lo mejor: cocinado horas en leche de coco hasta que se seca y concentra todos los sabores. Sin picante o muy poco.", stars: 4, subCategory: "daniel" },
+      { name: "Caesar Salad y ensaladas en TGIF / Chilis", location: "Pavilion KL / Mid Valley, Kuala Lumpur", description: "Si buscas ensaladas al estilo occidental, las cadenas americanas TGIF, Chilis y Tony Roma's tienen caesar salad, grilled chicken salad y opciones muy reconocibles. Con pollo a la parrilla sin picante garantizado.", price: "25-45 MYR", priceEur: "5-9.50 EUR", tip: "Los centros comerciales grandes como Pavilion y Mid Valley tienen estas cadenas. Perfecto cuando necesitas un respiro del picante.", stars: 3, subCategory: "daniel" },
+      { name: "Ayam Goreng Berempah — Pollo frito malayo", location: "Restoran Seri Melayu / Hawker centres", description: "El pollo frito mas aromatico del mundo: marinado horas con curcuma, lemongrass, galangal, hoja de lima kaffir y coco rallado antes de freirse. La piel queda crujiente y amarilla, el interior increiblemente jugoso.", price: "8-15 MYR por pieza", priceEur: "1.70-3.20 EUR", tip: "Lo encuentras en todos los hawker centres al mediodia. Pide 'ayam goreng' y señala la pieza. El muslo (peha) tiene mas sabor que la pechuga.", stars: 5, subCategory: "daniel" },
+      { name: "Restoran Udupi Sri Krishna — Vegetariano indio", location: "Brickfields, Kuala Lumpur", description: "Restaurante indio del sur 100% vegetariano. Masala dosa (crepe crujiente de lentejas rellena de patata especiada), idli, sambar y 4 tipos de chutney. Ensalada de pepino y coco fresco.", price: "8-20 MYR", priceEur: "1.70-4 EUR", tip: "El masala dosa gigante es un plato completo por 10-12 MYR. El lassi de mango fresco a 5 MYR es imprescindible.", stars: 4, subCategory: "daniel" },
+      { name: "Nasi Campur — El plato libre", location: "En toda Malasia", description: "Arroz con 3-5 acompañamientos a elegir de la vitrina. Siempre hay pollo sin picante (ayam goreng), huevo frito, tofu, verduras salteadas y pepino. El almuerzo del dia a dia malasio.", price: "6-15 MYR", priceEur: "1.30-3.20 EUR", tip: "Señala directamente lo que quieres. Di 'tak pedas' (sin picante) para los curries. Siempre hay algo sin picante para elegir.", stars: 4, subCategory: "daniel" },
+      { name: "Chicken Chop en los cafes coloniales de Penang", location: "George Town, Penang", description: "Herencia de la cocina colonial britanica: chuleta de pollo a la plancha con salsa de cebolla y champiñones, puré de patatas y ensalada de col. Tipico de los cafes Hainanese del siglo XX de Penang.", price: "15-28 MYR", priceEur: "3-6 EUR", tip: "Busca los cafes Hainanese mas antiguos como Ee Beng o Toasted & Roasted. El chicken chop de los años 50 con salsa Worcester es unico.", stars: 4, subCategory: "daniel" },
+      { name: "Biryani de pollo en Masjid India", location: "Masjid India, Kuala Lumpur", description: "Arroz basmati perfumado con azafran y cardamomo, cocinado junto al pollo en olla sellada con masa (dum biryani). Con raita de yogur y ensalada de cebolla encurtida.", price: "12-22 MYR", priceEur: "2.50-4.70 EUR", tip: "Los restaurantes del callejon detras de la mezquita tienen los precios mas bajos. Los viernes al mediodia estan llenos despues del rezo.", stars: 5, subCategory: "daniel" },
+      { name: "Subway, Marrybrown y comida rapida halal", location: "En toda Malasia", description: "Marrybrown es la cadena de comida rapida local con pollo frito, arroz y opciones halal muy asequibles. Subway tiene sanduiches con pollo asado y ensalada. Ideal cuando necesitas algo rapido y familiar.", price: "10-20 MYR", priceEur: "2-4 EUR", tip: "Marrybrown es mas barato que KFC y el pollo es sorprendentemente bueno. Su arroz con pollo es el menu mas pedido. Hay en todos los centros comerciales.", stars: 3, subCategory: "daniel" },
     ],
   },
   {
@@ -913,10 +785,15 @@ export default function ExperiencesSection() {
   const [activeCategory, setActiveCategory] = useState("aventura");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [danielMode, setDanielMode] = useState(false);
 
   const current = categories.find((c) => c.id === activeCategory)!;
-  const visibleExperiences = showAll ? current.experiences : current.experiences.slice(0, INITIAL_SHOW);
-  const hasMore = current.experiences.length > INITIAL_SHOW;
+  const isGastro = activeCategory === "gastronomia";
+  const baseExperiences = isGastro && danielMode
+    ? current.experiences.filter((e) => e.subCategory === "daniel")
+    : current.experiences.filter((e) => !e.subCategory);
+  const visibleExperiences = showAll ? baseExperiences : baseExperiences.slice(0, INITIAL_SHOW);
+  const hasMore = baseExperiences.length > INITIAL_SHOW;
 
   return (
     <section id="experiencias" className="py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -935,7 +812,7 @@ export default function ExperiencesSection() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => { setActiveCategory(cat.id); setExpandedExp(null); setShowAll(false); }}
+              onClick={() => { setActiveCategory(cat.id); setExpandedExp(null); setShowAll(false); setDanielMode(false); }}
               className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-semibold transition-all border ${
                 activeCategory === cat.id
                   ? `${cat.bgColor} ${cat.color} shadow-md scale-105 border-current/20`
@@ -949,13 +826,35 @@ export default function ExperiencesSection() {
         </div>
 
         {/* Section header */}
-        <div className={`rounded-2xl p-5 mb-6 border ${current.bgColor}`}>
-          <div className="flex items-center gap-3">
-            <current.icon className={`w-6 h-6 ${current.color}`} />
-            <div>
-              <h3 className={`font-bold text-lg ${current.color}`}>{current.label}</h3>
-              <p className="text-sm text-gray-500">{current.subtitle}</p>
+        <div className={`rounded-2xl p-5 mb-6 border ${danielMode ? "bg-lime-50 border-lime-100" : current.bgColor}`}>
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <current.icon className={`w-6 h-6 ${danielMode ? "text-lime-700" : current.color}`} />
+              <div>
+                <h3 className={`font-bold text-lg ${danielMode ? "text-lime-700" : current.color}`}>
+                  {danielMode ? "🍗 Comida Daniel" : current.label}
+                </h3>
+                <p className="text-sm text-gray-500">
+                  {danielMode ? "Pollo, arroz, ensaladas y restaurantes indios" : current.subtitle}
+                </p>
+              </div>
             </div>
+            {isGastro && (
+              <button
+                onClick={() => { setDanielMode(!danielMode); setShowAll(false); setExpandedExp(null); }}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all border ${
+                  danielMode
+                    ? "bg-orange-50 border-orange-200 text-orange-600 hover:bg-orange-100"
+                    : "bg-lime-50 border-lime-200 text-lime-700 hover:bg-lime-100"
+                }`}
+              >
+                {danielMode ? (
+                  <><ChevronLeft className="w-4 h-4" /> Volver a Donde Comer</>
+                ) : (
+                  <>Comida Daniel <ChevronRight className="w-4 h-4" /></>
+                )}
+              </button>
+            )}
           </div>
         </div>
 
