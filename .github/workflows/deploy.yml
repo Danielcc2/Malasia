@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - claude/init-malasia-repo-2H5XM
   workflow_dispatch:
 
 permissions:
