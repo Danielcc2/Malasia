@@ -10,10 +10,10 @@ const RATES: Record<string, number> = {
 };
 
 const currencyInfo: Record<string, { name: string; symbol: string; flag: string }> = {
-  EUR: { name: "Euro", symbol: "\u20AC", flag: "\uD83C\uDDEA\uD83C\uDDFA" },
-  USD: { name: "Dolar USA", symbol: "$", flag: "\uD83C\uDDFA\uD83C\uDDF8" },
-  GBP: { name: "Libra Esterlina", symbol: "\u00A3", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
-  MYR: { name: "Ringgit Malasio", symbol: "RM", flag: "\uD83C\uDDF2\uD83C\uDDFE" },
+  EUR: { name: "Euro", symbol: "€", flag: "🇪🇺" },
+  USD: { name: "Dolar USA", symbol: "$", flag: "🇺🇸" },
+  GBP: { name: "Libra Esterlina", symbol: "£", flag: "🇬🇧" },
+  MYR: { name: "Ringgit Malasio", symbol: "RM", flag: "🇲🇾" },
 };
 
 const quickAmounts = [10, 50, 100, 200, 500, 1000];
@@ -29,19 +29,40 @@ const priceReferences = [
   { item: "SIM card 30 dias", price: "25-40 MYR", eur: "5-8 EUR" },
 ];
 
+const foreignCurrencies = Object.keys(RATES);
+
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState<string>("100");
   const [fromCurrency, setFromCurrency] = useState("EUR");
+  const [toCurrency, setToCurrency] = useState("MYR");
   const [result, setResult] = useState(0);
+
+  // Convert any pair: foreign <-> MYR or foreign <-> foreign via MYR
+  const getRate = useCallback((from: string, to: string): number => {
+    if (from === to) return 1;
+    if (to === "MYR") return RATES[from];
+    if (from === "MYR") return 1 / RATES[to];
+    // foreign to foreign: EUR->USD = (EUR->MYR) / (USD->MYR)
+    return RATES[from] / RATES[to];
+  }, []);
 
   const convert = useCallback(() => {
     const val = parseFloat(amount) || 0;
-    setResult(val * RATES[fromCurrency]);
-  }, [amount, fromCurrency]);
+    setResult(val * getRate(fromCurrency, toCurrency));
+  }, [amount, fromCurrency, toCurrency, getRate]);
 
   useEffect(() => {
     convert();
   }, [convert]);
+
+  const swapCurrencies = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+    setAmount(result.toFixed(2));
+  };
+
+  const allCurrencies = [...foreignCurrencies, "MYR"];
+  const rate = getRate(fromCurrency, toCurrency);
 
   return (
     <section id="conversor" className="py-16 bg-gradient-to-b from-white to-amber-50">
@@ -51,7 +72,7 @@ export default function CurrencyConverter() {
             Conversor de Moneda
           </h2>
           <p className="text-gray-500">
-            Convierte tu dinero a Ringgit Malasio (MYR)
+            Convierte entre Euros, Dolares, Libras y Ringgit Malasio
           </p>
         </div>
 
@@ -63,14 +84,17 @@ export default function CurrencyConverter() {
               <h3 className="font-semibold text-gray-800">Calculadora</h3>
             </div>
 
-            {/* From currency */}
-            <label className="block text-sm text-gray-500 mb-2">Tu moneda</label>
-            <div className="flex gap-2 mb-4">
-              {Object.keys(RATES).map((cur) => (
+            {/* FROM */}
+            <label className="block text-sm text-gray-500 mb-2">De</label>
+            <div className="flex gap-2 mb-4 flex-wrap">
+              {allCurrencies.map((cur) => (
                 <button
                   key={cur}
-                  onClick={() => setFromCurrency(cur)}
-                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
+                  onClick={() => {
+                    if (cur === toCurrency) setToCurrency(fromCurrency);
+                    setFromCurrency(cur);
+                  }}
+                  className={`flex-1 min-w-[60px] py-2 px-2 rounded-lg text-sm font-medium transition-all ${
                     fromCurrency === cur
                       ? "bg-primary text-white shadow-md"
                       : "bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200"
@@ -97,7 +121,7 @@ export default function CurrencyConverter() {
             </div>
 
             {/* Quick amounts */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-4">
               {quickAmounts.map((qa) => (
                 <button
                   key={qa}
@@ -109,15 +133,50 @@ export default function CurrencyConverter() {
               ))}
             </div>
 
+            {/* Swap button */}
+            <button
+              onClick={swapCurrencies}
+              className="w-full flex items-center justify-center gap-2 py-2 mb-4 rounded-xl border border-dashed border-gray-300 text-sm text-gray-500 hover:border-primary hover:text-primary transition-all"
+            >
+              <ArrowRightLeft className="w-4 h-4" />
+              Invertir conversion
+            </button>
+
+            {/* TO */}
+            <label className="block text-sm text-gray-500 mb-2">A</label>
+            <div className="flex gap-2 mb-5 flex-wrap">
+              {allCurrencies.map((cur) => (
+                <button
+                  key={cur}
+                  onClick={() => {
+                    if (cur === fromCurrency) setFromCurrency(toCurrency);
+                    setToCurrency(cur);
+                  }}
+                  className={`flex-1 min-w-[60px] py-2 px-2 rounded-lg text-sm font-medium transition-all ${
+                    toCurrency === cur
+                      ? "bg-amber-500 text-white shadow-md"
+                      : "bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200"
+                  }`}
+                >
+                  {currencyInfo[cur].flag} {cur}
+                </button>
+              ))}
+            </div>
+
             {/* Result */}
             <div className="bg-gradient-to-r from-primary to-primary-dark rounded-xl p-5 text-white">
-              <p className="text-sm text-cyan-200 mb-1">Resultado en Ringgit</p>
+              <p className="text-sm text-cyan-200 mb-1">
+                {currencyInfo[fromCurrency].flag} {currencyInfo[fromCurrency].name} →{" "}
+                {currencyInfo[toCurrency].flag} {currencyInfo[toCurrency].name}
+              </p>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold">RM {result.toFixed(2)}</span>
+                <span className="text-3xl font-bold">
+                  {currencyInfo[toCurrency].symbol} {result.toFixed(2)}
+                </span>
               </div>
               <p className="text-xs text-cyan-200 mt-2 flex items-center gap-1">
                 <TrendingUp className="w-3 h-3" />
-                1 {fromCurrency} = {RATES[fromCurrency].toFixed(2)} MYR
+                1 {fromCurrency} = {rate.toFixed(4)} {toCurrency}
               </p>
             </div>
 
