@@ -45,12 +45,12 @@ const categories: Category[] = [
     emoji: "🏄",
     color: "text-blue-600",
     bgColor: "bg-blue-50 border-blue-100",
-    subtitle: "Kayak, tirolina, senderismo extremo y mas",
+    subtitle: "Kayak, tirolina, rafting, buceo y mucho mas",
     experiences: [
       {
         name: "Kayak en los manglares de Langkawi",
         location: "Langkawi, Kedah",
-        description: "Navega entre manglares centenarios con aguilas de mar sobrevolando tu cabeza. Tours de 2-3h con guia y equipo incluido.",
+        description: "Navega entre manglares centenarios con aguilas de mar sobrevolando tu cabeza. Tours de 2-3h con guia y equipo incluido. El ecosistema de manglares de Langkawi es Patrimonio UNESCO y uno de los mas sanos del mundo.",
         price: "80-150 MYR",
         priceEur: "17-32 EUR",
         tip: "Reserva el tour del atardecer, los colores son espectaculares y hay menos turistas.",
@@ -59,7 +59,7 @@ const categories: Category[] = [
       {
         name: "Tirolina en la selva de Penang",
         location: "Penang Hill, George Town",
-        description: "Vuela sobre el dosel de la selva tropical a 30m de altura. Circuito de 8 plataformas con vistas increibles.",
+        description: "Vuela sobre el dosel de la selva tropical a 30m de altura. Circuito de 8 plataformas con vistas increibles a George Town y el estrecho de Malaca. Operado por Penang Hill Adventure.",
         price: "120-180 MYR",
         priceEur: "25-38 EUR",
         tip: "Ve por la manana para evitar lluvias vespertinas y las colas de turistas.",
@@ -68,7 +68,7 @@ const categories: Category[] = [
       {
         name: "White water rafting en Gopeng",
         location: "Gopeng, Perak",
-        description: "Rafting en rapidos de clase III-IV en el rio Kampar. Solo 2h desde KL, perfecto para un dia de aventura.",
+        description: "Rafting en rapidos de clase III-IV en el rio Kampar. Solo 2h desde KL, perfecto para un dia de aventura. El recorrido dura unas 2 horas entre rapidos, piscinas naturales y selva virgen.",
         price: "100-160 MYR",
         priceEur: "21-34 EUR",
         tip: "Nivel principiante apto, no se necesita experiencia. Llevan todo el material.",
@@ -77,7 +77,7 @@ const categories: Category[] = [
       {
         name: "Buceo en Pulau Sipadan",
         location: "Sipadan, Sabah",
-        description: "Considerado top 3 del mundo. Tortugas, tiburones martillo y paredes de coral a pico. Plazas muy limitadas.",
+        description: "Considerado top 3 del mundo. Tortugas, tiburones martillo y paredes de coral a pico. La isla emerge de un volcan submarino de 600m. Plazas muy limitadas, solo 120 personas al dia.",
         price: "350-500 MYR",
         priceEur: "74-106 EUR",
         tip: "Reserva con 3-6 meses de antelacion, solo 120 personas al dia tienen permiso.",
@@ -86,7 +86,7 @@ const categories: Category[] = [
       {
         name: "Snorkel nocturno bioluminiscente",
         location: "Islas Perhentian",
-        description: "Nada en la oscuridad mientras el plancton ilumina el agua en azul neon a tu alrededor. Una experiencia magica.",
+        description: "Nada en la oscuridad mientras el plancton ilumina el agua en azul neon a tu alrededor. Una experiencia magica que no olvidaras. Los tours salen desde los bungalows de la playa.",
         price: "60-90 MYR",
         priceEur: "13-19 EUR",
         tip: "Los meses de mayo a agosto son los mejores para ver el fenomeno bioluminiscente.",
@@ -95,10 +95,154 @@ const categories: Category[] = [
       {
         name: "Escalada en roca en Batu Caves",
         location: "Batu Caves, Kuala Lumpur",
-        description: "Las paredes de piedra caliza de 400 millones de anos ofrecen rutas de escalada para todos los niveles junto a los templos.",
+        description: "Las paredes de piedra caliza de 400 millones de anos ofrecen rutas de escalada para todos los niveles junto a los templos hindues. Mas de 150 rutas de dificultad variada.",
         price: "50-100 MYR",
         priceEur: "11-21 EUR",
         tip: "Contrata un guia local certificado, conocen las mejores rutas y el equipo esta incluido.",
+        stars: 4,
+      },
+      {
+        name: "Ascenso al Monte Kinabalu",
+        location: "Parque Nacional Kinabalu, Sabah",
+        description: "Escala el pico mas alto del sudeste asiatico (4095m) y ve el amanecer desde Low's Peak sobre las nubes. La ruta dura 2 dias con pernoctacion en el refugio Laban Rata a 3270m.",
+        price: "600-900 MYR (guia+pernocta)",
+        priceEur: "127-191 EUR",
+        tip: "Reserva el permiso con meses de antelacion en el portal oficial del parque. Las plazas se agotan.",
+        stars: 5,
+      },
+      {
+        name: "Parapente en Bukit Jugra",
+        location: "Banting, Selangor",
+        description: "Vuela en parapente tandem sobre las colinas de Selangor con vistas al estrecho de Malaca. Vuelos de 15-20 minutos con instructores certificados. El mejor spot de parapente de la peninsula.",
+        price: "200-300 MYR",
+        priceEur: "42-64 EUR",
+        tip: "Los mejores dias son de noviembre a marzo con vientos favorables del noreste.",
+        stars: 4,
+      },
+      {
+        name: "Surf en Cherating Beach",
+        location: "Cherating, Pahang",
+        description: "La playa mas famosa para surfear en la costa este. Olas de 1-2m ideales para principiantes. Escuelas de surf con tablas de alquiler y clases desde cero. Temporada alta de noviembre a marzo.",
+        price: "80-150 MYR (clase+tabla)",
+        priceEur: "17-32 EUR",
+        tip: "Cherating es la cuna del surf en Malasia. El ambiente es muy relajado y los locales son muy amigables.",
+        stars: 4,
+      },
+      {
+        name: "Trekking nocturno en Taman Negara",
+        location: "Taman Negara, Pahang",
+        description: "Aventura nocturna por la selva mas antigua del mundo (130 millones de anos) con guia experto. Verasnakes, tarántulas, ciempiés gigantes y si tienes suerte, ojos de leopardo en la oscuridad.",
+        price: "80-120 MYR",
+        priceEur: "17-25 EUR",
+        tip: "Lleva repelente fuerte (DEET 50%), botas cerradas y linterna frontal. El guia incluye el equipo.",
+        stars: 5,
+      },
+      {
+        name: "Wakeboard en Putrajaya",
+        location: "Putrajaya, Wilayah",
+        description: "Practica wakeboard y esqui acuatico en el lago artificial de la ciudad administrativa. Instalaciones modernas, instructores certificados y equipo de primera calidad.",
+        price: "80-150 MYR por hora",
+        priceEur: "17-32 EUR",
+        tip: "El Putrajaya Waterski & Wakeboard Club es el mejor del pais. Los fines de semana organizan competiciones.",
+        stars: 3,
+      },
+      {
+        name: "Canopy Walk en Taman Negara",
+        location: "Taman Negara, Pahang",
+        description: "Camina por la pasarela colgante mas larga del mundo (530m) a 40m de altura entre los arboles gigantes. Una perspectiva unica de la selva tropical que deja sin palabras.",
+        price: "5 MYR",
+        priceEur: "1 EUR",
+        tip: "Llega justo cuando abre a las 9am. Las tardes suelen tener lluvia y la pasarela se cierra.",
+        stars: 5,
+      },
+      {
+        name: "Kitesurf en Pantai Besar",
+        location: "Kuala Rompin, Pahang",
+        description: "Spot de kitesurf de clase mundial con vientos constantes del monzon. Cursos para principiantes y alquiler para expertos. Aguas poco profundas perfectas para aprender.",
+        price: "300-500 MYR (curso 3h)",
+        priceEur: "64-106 EUR",
+        tip: "Temporada perfecta de noviembre a febrero. Fuera de temporada el viento es irregular.",
+        stars: 4,
+      },
+      {
+        name: "Ciclismo de montana en Bukit Timah",
+        location: "Fraser's Hill, Pahang",
+        description: "Rutas de mountain bike entre colinas con plantaciones de te, cascadas y aldeas remotas. Alquiler de bicicletas y tours guiados disponibles. Dificultad variada de facil a experto.",
+        price: "50-120 MYR",
+        priceEur: "11-25 EUR",
+        tip: "Fraser's Hill tiene el clima mas fresco de Malasia peninsular. Perfecto para pedalear sin sudar demasiado.",
+        stars: 4,
+      },
+      {
+        name: "Pesca deportiva en alta mar",
+        location: "Rompin / Mersing, Johor",
+        description: "Pesca del marlin azul y el pez vela en las aguas del Mar del Sur de China. Los mejores meses son de febrero a abril cuando los peces siguen las corrientes calidas.",
+        price: "500-1200 MYR por barco",
+        priceEur: "106-254 EUR",
+        tip: "Compartir barco con otros pescadores sale a 150-250 MYR por persona. Lleva medicacion para el mareo.",
+        stars: 5,
+      },
+      {
+        name: "Espeleologia en Mulu Caves",
+        location: "Parque Nacional Mulu, Sarawak",
+        description: "Explora Deer Cave (la cueva de paso mas grande del mundo) y Clearwater Cave (la mas larga de Asia). Circuitos de aventura para espeleologos con rapel y gateo por pasajes ocultos.",
+        price: "200-500 MYR",
+        priceEur: "42-106 EUR",
+        tip: "El espectaculo de 3 millones de murcielagos saliendo de Deer Cave al atardecer es uno de los mas impresionantes del planeta.",
+        stars: 5,
+      },
+      {
+        name: "Rafting en el rio Pelagus",
+        location: "Kapit, Sarawak",
+        description: "Rafting de expedicion por los rapidos Pelagus en el corazon de Borneo. Rodeado de selva virgen sin carreteras, solo accesible en barco. Una aventura de verdad para amantes del riesgo.",
+        price: "250-400 MYR",
+        priceEur: "53-85 EUR",
+        tip: "Solo disponible en epoca de lluvia (octubre-enero) cuando el nivel del rio es suficiente.",
+        stars: 5,
+      },
+      {
+        name: "Sandboarding en las dunas de Penarik",
+        location: "Penarik, Terengganu",
+        description: "Deslizate por las dunas de arena blanca de la costa de Terengganu con una tabla. Una actividad poco conocida y baratisima que los locales practican de forma espontanea.",
+        price: "20-40 MYR (alquiler tabla)",
+        priceEur: "4-8.50 EUR",
+        tip: "Las dunas son mejores al amanecer antes de que el calor las ablande. Lleva gafas de sol.",
+        stars: 3,
+      },
+      {
+        name: "ATV en las plantaciones de Sabah",
+        location: "Kota Belud, Sabah",
+        description: "Conduce un quad ATV por pistas de tierra roja entre plantaciones de palma y aldeas del pueblo Bajau. Con vistas al Monte Kinabalu al fondo. Tours de 1-3 horas.",
+        price: "120-250 MYR",
+        priceEur: "25-53 EUR",
+        tip: "Los tours de manana tienen mejor visibilidad del Kinabalu sin nubes. Llevan casco y guantes.",
+        stars: 4,
+      },
+      {
+        name: "Paddle surf (SUP) en las Islas Redang",
+        location: "Pulau Redang, Terengganu",
+        description: "Paddle surf en aguas cristalinas de color turquesa sobre arrecifes de coral. Puedes ver tortugas y peces de colores directamente desde la tabla. Alquiler disponible en todos los resorts.",
+        price: "40-70 MYR por hora",
+        priceEur: "8.50-15 EUR",
+        tip: "La mejor hora es de 7-9am antes de que el viento levante. El agua esta en calma absoluta.",
+        stars: 5,
+      },
+      {
+        name: "Via ferrata en Monte Kinabalu",
+        location: "Parque Nacional Kinabalu, Sabah",
+        description: "La via ferrata mas alta del mundo (3776m) con vistas espectaculares. Circuito Low's Peak con cables de acero fijos en la roca granítica. Adrenalina pura sobre las nubes de Borneo.",
+        price: "400-600 MYR",
+        priceEur: "85-127 EUR",
+        tip: "Requiere buen estado fisico. Se combina con el ascenso al Kinabalu en 2 dias. Reserva con antelacion.",
+        stars: 5,
+      },
+      {
+        name: "Trekking al crater del Monte Jerai",
+        location: "Yan, Kedah",
+        description: "Senderismo hasta la cima del Monte Jerai (1217m) con vistas panoramicas sobre los arrozales de Kedah y el estrecho de Malaca. Sendero bien marcado de 4-5h ida y vuelta.",
+        price: "20-50 MYR (guia opcional)",
+        priceEur: "4-11 EUR",
+        tip: "Empieza antes de las 7am para evitar el calor. En la cima hay un resort con restaurante y terrazas.",
         stars: 4,
       },
     ],
@@ -338,11 +482,16 @@ const categories: Category[] = [
   },
 ];
 
+const INITIAL_SHOW = 6;
+
 export default function ExperiencesSection() {
   const [activeCategory, setActiveCategory] = useState("aventura");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const current = categories.find((c) => c.id === activeCategory)!;
+  const visibleExperiences = showAll ? current.experiences : current.experiences.slice(0, INITIAL_SHOW);
+  const hasMore = current.experiences.length > INITIAL_SHOW;
 
   return (
     <section id="experiencias" className="py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -361,7 +510,7 @@ export default function ExperiencesSection() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => { setActiveCategory(cat.id); setExpandedExp(null); }}
+              onClick={() => { setActiveCategory(cat.id); setExpandedExp(null); setShowAll(false); }}
               className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-semibold transition-all border ${
                 activeCategory === cat.id
                   ? `${cat.bgColor} ${cat.color} shadow-md scale-105 border-current/20`
@@ -387,7 +536,7 @@ export default function ExperiencesSection() {
 
         {/* Experience cards */}
         <div className="grid md:grid-cols-2 gap-4">
-          {current.experiences.map((exp, i) => {
+          {visibleExperiences.map((exp, i) => {
             const key = `${activeCategory}-${i}`;
             const isOpen = expandedExp === key;
             return (
@@ -453,6 +602,32 @@ export default function ExperiencesSection() {
             );
           })}
         </div>
+
+        {/* Ver más / Ver menos */}
+        {hasMore && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => { setShowAll(!showAll); setExpandedExp(null); }}
+              className={`inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all shadow-sm border ${
+                showAll
+                  ? "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+                  : `${current.bgColor} ${current.color} border-current/20 hover:opacity-90`
+              }`}
+            >
+              {showAll ? (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  Ver menos
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4" />
+                  Ver las {current.experiences.length - INITIAL_SHOW} experiencias restantes
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
