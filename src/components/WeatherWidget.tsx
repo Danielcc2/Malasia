@@ -28,6 +28,18 @@ const bgGradientMap: Record<string, string> = {
 const ALL_CITIES = CITY_COORDS.map((c) => c.name);
 const DAY_OPTIONS = [5, 8, 10, 15];
 
+/** Get current hour in Malaysia timezone (UTC+8) */
+function getMalaysiaHour(): number {
+  return parseInt(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Kuala_Lumpur",
+      hour: "numeric",
+      hour12: false,
+    }).format(new Date()),
+    10
+  );
+}
+
 function UVBar({ uv }: { uv: number }) {
   const pct = Math.min(100, (uv / 12) * 100);
   const color = uv <= 2 ? "bg-green-400" : uv <= 5 ? "bg-yellow-400" : uv <= 7 ? "bg-orange-400" : uv <= 10 ? "bg-red-500" : "bg-purple-600";
@@ -116,7 +128,7 @@ function DayDetail({ day, onClose }: { day: WeatherDay; onClose: () => void }) {
   const [selectedHour, setSelectedHour] = useState<HourlyData | null>(null);
 
   useEffect(() => {
-    const nowHour = new Date().getHours();
+    const nowHour = getMalaysiaHour();
     if (scrollRef.current) {
       const el = scrollRef.current.children[nowHour] as HTMLElement;
       if (el) el.scrollIntoView({ inline: "center", block: "nearest" });
@@ -164,7 +176,7 @@ function DayDetail({ day, onClose }: { day: WeatherDay; onClose: () => void }) {
                 <div ref={scrollRef} className="flex gap-2 pb-1" style={{ minWidth: "max-content" }}>
                   {day.hourly.map((h, i) => {
                     const Icon = HourIcon(h.icon);
-                    const isNow = i === new Date().getHours() && day.day === "Hoy";
+                    const isNow = i === getMalaysiaHour() && day.day === "Hoy";
                     return (
                       <button
                         key={i}
@@ -360,7 +372,10 @@ export default function WeatherWidget() {
             </button>
           ))}
         </div>
-        <p className="text-center text-sm font-semibold text-primary mb-6">{selectedCity}</p>
+        <p className="text-center text-sm font-semibold text-primary mb-1">{selectedCity}</p>
+        <p className="text-center text-xs text-gray-400 mb-6">
+          Hora local: {new Date().toLocaleTimeString("es-ES", { timeZone: "Asia/Kuala_Lumpur", hour: "2-digit", minute: "2-digit" })} (Malasia, UTC+8)
+        </p>
 
         {/* Loading state */}
         {loading && (
