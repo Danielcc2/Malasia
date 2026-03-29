@@ -400,8 +400,14 @@ export default function WeatherWidget() {
         {!loading && !error && forecast.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6">
             {forecast.map((day, i) => {
-              const Icon = iconMap[day.icon] || Sun;
-              const grad = bgGradientMap[day.icon] || bgGradientMap.cloud;
+              // For today: show current hour's real temp & condition
+              const isToday = day.day === "Hoy";
+              const nowHourData = isToday ? day.hourly[getMalaysiaHour()] : null;
+              const displayTemp = nowHourData ? nowHourData.temp : day.temp;
+              const displayCondition = nowHourData ? nowHourData.condition : day.condition;
+              const displayIcon = nowHourData ? nowHourData.icon : day.icon;
+              const Icon = iconMap[displayIcon] || Sun;
+              const grad = bgGradientMap[displayIcon] || bgGradientMap.cloud;
               return (
                 <button
                   key={i}
@@ -411,12 +417,16 @@ export default function WeatherWidget() {
                   <p className="text-sm font-semibold text-white mb-1">{day.day}</p>
                   <p className="text-xs text-white/70 mb-3">{day.date}</p>
                   <Icon className="w-10 h-10 mx-auto mb-3 text-white" />
-                  <p className="text-2xl font-bold text-white">{day.temp}°</p>
-                  <p className="text-xs text-white/70">{day.tempMin}° min</p>
-                  <p className="text-xs text-white/80 mt-2 leading-tight">{day.condition}</p>
+                  <p className="text-2xl font-bold text-white">{displayTemp}°</p>
+                  {isToday ? (
+                    <p className="text-xs text-white/70">{day.temp}° max · {day.tempMin}° min</p>
+                  ) : (
+                    <p className="text-xs text-white/70">{day.tempMin}° min</p>
+                  )}
+                  <p className="text-xs text-white/80 mt-2 leading-tight">{displayCondition}</p>
                   <div className="flex items-center justify-center gap-2 mt-3 text-xs text-white/70">
                     <Droplets className="w-3 h-3" /><span>{day.humidity}%</span>
-                    <CloudRain className="w-3 h-3 ml-1" /><span>{day.rain}%</span>
+                    <CloudRain className="w-3 h-3 ml-1" /><span>{nowHourData ? nowHourData.rain : day.rain}%</span>
                   </div>
                   <div className="flex items-center justify-center gap-1 mt-2 text-white/50 text-xs">
                     <ChevronDown className="w-3 h-3" /><span>Ver detalle</span>
